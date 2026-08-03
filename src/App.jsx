@@ -14,7 +14,16 @@ export default function App() {
 
     setInputValue("");
   };
-  const todoList = todos.map((todo) => <li key={todo.id}>{todo.text}</li>);
+
+  const handleDeleteTodo = (id) => {
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+  };
+  const todoList = todos.map((todo) => (
+    <li key={todo.id}>
+      {todo.text}
+      <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
+    </li>
+  ));
 
   return (
     <div className="main-container">
