@@ -19,6 +19,13 @@ export default function App() {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   };
 
+  const handleToggleComplete = (id) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+      ),
+    );
+  };
   return (
     <div className="main-container">
       <h1>My Tasks</h1>
@@ -35,7 +42,15 @@ export default function App() {
       <ul className="todos-list">
         {todos.map((todo) => (
           <li key={todo.id}>
-            {todo.text}
+            <span
+              onClick={() => handleToggleComplete(todo.id)}
+              style={{
+                textDecoration: todo.completed ? "line-through" : "none",
+                cursor: "pointer",
+              }}
+            >
+              {todo.text}
+            </span>
             <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
           </li>
         ))}
