@@ -3,27 +3,21 @@ import "./App.css";
 
 export default function App() {
   const [todos, setTodos] = useState([]);
-  const [inputValue, setInputValue] = useState("");
+  const [newTodo, setNewTodo] = useState("");
 
   const handleAddTodo = (e) => {
     e.preventDefault();
-    if (inputValue.trim() === "") return;
+    if (newTodo.trim() === "") return;
 
-    const newTask = { id: Date.now(), text: inputValue, completed: false };
+    const newTask = { id: Date.now(), text: newTodo, completed: false };
     setTodos((prevTodos) => [...prevTodos, newTask]);
 
-    setInputValue("");
+    setNewTodo("");
   };
 
   const handleDeleteTodo = (id) => {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   };
-  const todoList = todos.map((todo) => (
-    <li key={todo.id}>
-      {todo.text}
-      <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
-    </li>
-  ));
 
   return (
     <div className="main-container">
@@ -33,12 +27,19 @@ export default function App() {
         <input
           type="text"
           placeholder="What needs to be done?"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          value={newTodo}
+          onChange={(e) => setNewTodo(e.target.value)}
         />
         <button type="submit">Add Task</button>
       </form>
-      <ul className="todos-list">{todoList}</ul>
+      <ul className="todos-list">
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            {todo.text}
+            <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
       <p>Total Tasks Added: {todos.length}</p>
     </div>
   );
