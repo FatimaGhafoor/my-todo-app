@@ -14,6 +14,7 @@ export default function App() {
 
     setInputValue("");
   };
+  const todoList = todos.map((todo) => <li key={todo.id}>{todo.text}</li>);
 
   return (
     <div className="main-container">
@@ -28,6 +29,7 @@ export default function App() {
         />
         <button type="submit">Add Task</button>
       </form>
+      <ul className="todos-list">{todoList}</ul>
       <p>Total Tasks Added: {todos.length}</p>
     </div>
   );
