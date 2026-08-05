@@ -26,8 +26,9 @@ export default function App() {
       ),
     );
   };
-
+  const completedTasks = todos.filter((todo) => todo.completed).length;
   const remainingTasks = todos.filter((todo) => !todo.completed).length;
+
   return (
     <div className="main-container">
       <h1>My Tasks</h1>
@@ -42,7 +43,7 @@ export default function App() {
         <button type="submit">Add Task</button>
       </form>
       {todos.length === 0 ? (
-        <p>No tasks left! Enjoy your day! 🎉</p>
+        <p>"No tasks yet. Add your first task!"</p>
       ) : (
         <ul className="todos-list">
           {todos.map((todo) => (
@@ -64,6 +65,7 @@ export default function App() {
 
       <div className="todos-stats">
         <p>Total Tasks: {todos.length}</p>
+        <p>Completed Tasks: {completedTasks}</p>
         <p>Remaining Tasks: {remainingTasks}</p>
       </div>
     </div>
