@@ -29,6 +29,11 @@ export default function App() {
   };
   const completedTasks = todos.filter((todo) => todo.completed).length;
   const remainingTasks = todos.filter((todo) => !todo.completed).length;
+  const getFilteredTodos = todos.filter((todo) => {
+    if (filter === "active") return !todo.completed;
+    if (filter === "completed") return todo.completed;
+    return true;
+  });
 
   return (
     <div className="main-container">
@@ -56,11 +61,11 @@ export default function App() {
         </button>
       </div>
 
-      {todos.length === 0 ? (
+      {getFilteredTodos.length === 0 ? (
         <p>No tasks yet. Add your first task!</p>
       ) : (
         <ul className="todos-list">
-          {todos.map((todo) => (
+          {getFilteredTodos.map((todo) => (
             <li key={todo.id}>
               <span
                 onClick={() => handleToggleComplete(todo.id)}
