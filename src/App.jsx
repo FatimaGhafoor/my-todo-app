@@ -30,10 +30,10 @@ export default function App() {
   };
   const completedTasks = todos.filter((todo) => todo.completed).length;
   const remainingTasks = todos.filter((todo) => !todo.completed).length;
-  const getFilteredTodos = todos.filter((todo) => {
+  const filteredTodos = todos.filter((todo) => {
     const matchSearch = todo.text
       .toLowerCase()
-      .includes(searchQuery.toLocaleLowerCase());
+      .includes(searchQuery.toLowerCase());
     if (filter === "active") return !todo.completed && matchSearch;
     if (filter === "completed") return todo.completed && matchSearch;
     return matchSearch;
@@ -61,22 +61,31 @@ export default function App() {
       />
 
       <div className="filter-section">
-        <button className="filter-btn" onClick={() => setFilter("all")}>
+        <button
+          className={filter === "all" ? "active" : ""}
+          onClick={() => setFilter("all")}
+        >
           All
         </button>
-        <button className="filter-btn" onClick={() => setFilter("active")}>
+        <button
+          className={filter === "active" ? "active" : ""}
+          onClick={() => setFilter("active")}
+        >
           Active
         </button>
-        <button className="filter-btn" onClick={() => setFilter("completed")}>
+        <button
+          className={filter === "completed" ? "active" : ""}
+          onClick={() => setFilter("completed")}
+        >
           Completed
         </button>
       </div>
 
-      {getFilteredTodos.length === 0 ? (
+      {filteredTodos.length === 0 ? (
         <p>No tasks yet. Add your first task!</p>
       ) : (
         <ul className="todos-list">
-          {getFilteredTodos.map((todo) => (
+          {filteredTodos.map((todo) => (
             <li key={todo.id}>
               <span
                 onClick={() => handleToggleComplete(todo.id)}
