@@ -5,6 +5,7 @@ export default function App() {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
   const [filter, setFilter] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleAddTodo = (e) => {
     e.preventDefault();
@@ -30,9 +31,12 @@ export default function App() {
   const completedTasks = todos.filter((todo) => todo.completed).length;
   const remainingTasks = todos.filter((todo) => !todo.completed).length;
   const getFilteredTodos = todos.filter((todo) => {
-    if (filter === "active") return !todo.completed;
-    if (filter === "completed") return todo.completed;
-    return true;
+    const matchSearch = todo.text
+      .toLowerCase()
+      .includes(searchQuery.toLocaleLowerCase());
+    if (filter === "active") return !todo.completed && matchSearch;
+    if (filter === "completed") return todo.completed && matchSearch;
+    return matchSearch;
   });
 
   return (
@@ -48,6 +52,13 @@ export default function App() {
         />
         <button type="submit">Add Task</button>
       </form>
+
+      <input
+        type="text"
+        placeholder="Search your task..."
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
 
       <div className="filter-section">
         <button className="filter-btn" onClick={() => setFilter("all")}>
