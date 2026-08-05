@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import "./App.css";
 
 export default function App() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const savedTodos = localStorage.getItem("todos-database");
+    return savedTodos ? JSON.parse(savedTodos) : [];
+  });
   const [newTodo, setNewTodo] = useState("");
   const [filter, setFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
@@ -30,6 +34,12 @@ export default function App() {
   };
   const completedTasks = todos.filter((todo) => todo.completed).length;
   const remainingTasks = todos.filter((todo) => !todo.completed).length;
+
+  useEffect(() => {
+    localStorage.setItem("todos-database", JSON.stringify(todos));
+    console.log("Todos updated! LocalStorage updated securely.");
+  }, [todos]);
+
   const filteredTodos = todos.filter((todo) => {
     const matchSearch = todo.text
       .toLowerCase()
