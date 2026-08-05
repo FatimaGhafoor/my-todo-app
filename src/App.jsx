@@ -4,6 +4,7 @@ import "./App.css";
 export default function App() {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState("");
+  const [filter, setFilter] = useState("all");
 
   const handleAddTodo = (e) => {
     e.preventDefault();
@@ -42,8 +43,21 @@ export default function App() {
         />
         <button type="submit">Add Task</button>
       </form>
+
+      <div className="filter-section">
+        <button className="filter-btn" onClick={() => setFilter("all")}>
+          All
+        </button>
+        <button className="filter-btn" onClick={() => setFilter("active")}>
+          Active
+        </button>
+        <button className="filter-btn" onClick={() => setFilter("completed")}>
+          Completed
+        </button>
+      </div>
+
       {todos.length === 0 ? (
-        <p>"No tasks yet. Add your first task!"</p>
+        <p>No tasks yet. Add your first task!</p>
       ) : (
         <ul className="todos-list">
           {todos.map((todo) => (
