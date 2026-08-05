@@ -26,6 +26,8 @@ export default function App() {
       ),
     );
   };
+
+  const remainingTasks = todos.filter((todo) => !todo.completed).length;
   return (
     <div className="main-container">
       <h1>My Tasks</h1>
@@ -39,23 +41,31 @@ export default function App() {
         />
         <button type="submit">Add Task</button>
       </form>
-      <ul className="todos-list">
-        {todos.map((todo) => (
-          <li key={todo.id}>
-            <span
-              onClick={() => handleToggleComplete(todo.id)}
-              style={{
-                textDecoration: todo.completed ? "line-through" : "none",
-                cursor: "pointer",
-              }}
-            >
-              {todo.text}
-            </span>
-            <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
-      <p>Total Tasks Added: {todos.length}</p>
+      {todos.length === 0 ? (
+        <p>No tasks left! Enjoy your day! 🎉</p>
+      ) : (
+        <ul className="todos-list">
+          {todos.map((todo) => (
+            <li key={todo.id}>
+              <span
+                onClick={() => handleToggleComplete(todo.id)}
+                style={{
+                  textDecoration: todo.completed ? "line-through" : "none",
+                  cursor: "pointer",
+                }}
+              >
+                {todo.text}
+              </span>
+              <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
+            </li>
+          ))}
+        </ul>
+      )}
+
+      <div className="todos-stats">
+        <p>Total Tasks: {todos.length}</p>
+        <p>Remaining Tasks: {remainingTasks}</p>
+      </div>
     </div>
   );
 }
