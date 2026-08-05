@@ -1,11 +1,14 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 
 export default function App() {
   const [todos, setTodos] = useState(() => {
     const savedTodos = localStorage.getItem("todos-database");
-    return savedTodos ? JSON.parse(savedTodos) : [];
+    try {
+      return JSON.parse(savedTodos);
+    } catch {
+      return [];
+    }
   });
   const [newTodo, setNewTodo] = useState("");
   const [filter, setFilter] = useState("all");
@@ -37,7 +40,6 @@ export default function App() {
 
   useEffect(() => {
     localStorage.setItem("todos-database", JSON.stringify(todos));
-    console.log("Todos updated! LocalStorage updated securely.");
   }, [todos]);
 
   const filteredTodos = todos.filter((todo) => {
@@ -91,8 +93,10 @@ export default function App() {
         </button>
       </div>
 
-      {filteredTodos.length === 0 ? (
-        <p>No tasks yet. Add your first task!</p>
+      {todos.length === 0 ? (
+        <p className="empty-message">No tasks yet. Add your first task! 🚀</p>
+      ) : filteredTodos.length === 0 ? (
+        <p>No matching tasks found. 🔍</p>
       ) : (
         <ul className="todos-list">
           {filteredTodos.map((todo) => (
