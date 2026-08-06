@@ -3,6 +3,7 @@ import "./App.css";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import SearchBar from "./components/SearchBar";
+import FilterButton from "./components/FilterButton";
 
 export default function App() {
   const [todos, setTodos] = useState(() => {
@@ -66,26 +67,7 @@ export default function App() {
 
       <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
-      <div className="filter-section">
-        <button
-          className={filter === "all" ? "active" : ""}
-          onClick={() => setFilter("all")}
-        >
-          All
-        </button>
-        <button
-          className={filter === "active" ? "active" : ""}
-          onClick={() => setFilter("active")}
-        >
-          Active
-        </button>
-        <button
-          className={filter === "completed" ? "active" : ""}
-          onClick={() => setFilter("completed")}
-        >
-          Completed
-        </button>
-      </div>
+      <FilterButton setFilter={setFilter} />
 
       <TodoList
         todos={todos}
