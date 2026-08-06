@@ -1,4 +1,4 @@
-export default function FilterButton({ setFilter }) {
+export default function FilterButton({filter, setFilter }) {
   return (
     <div className="filter-section">
       <button
