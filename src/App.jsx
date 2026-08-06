@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
+import SearchBar from "./components/SearchBar";
 
 export default function App() {
   const [todos, setTodos] = useState(() => {
@@ -63,12 +64,7 @@ export default function App() {
         handleAddTodo={handleAddTodo}
       />
 
-      <input
-        type="text"
-        placeholder="Search your task..."
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-      />
+      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
       <div className="filter-section">
         <button
