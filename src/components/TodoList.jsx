@@ -13,18 +13,12 @@ export default function TodoList({
       ) : (
         <ul className="todos-list">
           {filteredTodos.map((todo) => (
-            <li key={todo.id}>
-              <span
-                onClick={() => handleToggleComplete(todo.id)}
-                style={{
-                  textDecoration: todo.completed ? "line-through" : "none",
-                  cursor: "pointer",
-                }}
-              >
-                {todo.text}
-              </span>
-              <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
-            </li>
+            <TodoItem
+              key={todo.id}
+              todo={todo}
+              handleDeleteTodo={handleDeleteTodo}
+              handleToggleComplete={handleToggleComplete}
+            />
           ))}
         </ul>
       )}
