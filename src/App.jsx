@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import TodoForm from "./components/TodoForm";
+import TodoList from "./components/TodoList";
 
 export default function App() {
   const [todos, setTodos] = useState(() => {
@@ -90,28 +91,12 @@ export default function App() {
         </button>
       </div>
 
-      {todos.length === 0 ? (
-        <p className="empty-message">No tasks yet. Add your first task! 🚀</p>
-      ) : filteredTodos.length === 0 ? (
-        <p>No matching tasks found. 🔍</p>
-      ) : (
-        <ul className="todos-list">
-          {filteredTodos.map((todo) => (
-            <li key={todo.id}>
-              <span
-                onClick={() => handleToggleComplete(todo.id)}
-                style={{
-                  textDecoration: todo.completed ? "line-through" : "none",
-                  cursor: "pointer",
-                }}
-              >
-                {todo.text}
-              </span>
-              <button onClick={() => handleDeleteTodo(todo.id)}>Delete</button>
-            </li>
-          ))}
-        </ul>
-      )}
+      <TodoList
+        todos={todos}
+        filteredTodos={filteredTodos}
+        handleDeleteTodo={handleDeleteTodo}
+        handleToggleComplete={handleToggleComplete}
+      />
 
       <div className="todos-stats">
         <p>Total Tasks: {todos.length}</p>
