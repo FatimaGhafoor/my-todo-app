@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+import TodoForm from "./components/TodoForm";
 
 export default function App() {
   const [todos, setTodos] = useState(() => {
@@ -55,15 +56,11 @@ export default function App() {
     <div className="main-container">
       <h1>My Tasks</h1>
 
-      <form onSubmit={handleAddTodo}>
-        <input
-          type="text"
-          placeholder="What needs to be done?"
-          value={newTodo}
-          onChange={(e) => setNewTodo(e.target.value)}
-        />
-        <button type="submit">Add Task</button>
-      </form>
+      <TodoForm
+        newTodo={newTodo}
+        setNewTodo={setNewTodo}
+        handleAddTodo={handleAddTodo}
+      />
 
       <input
         type="text"
