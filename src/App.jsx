@@ -4,7 +4,7 @@ import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import SearchBar from "./components/SearchBar";
 import FilterButton from "./components/FilterButton";
-import TodoStates from "./components/TodoStats";
+import TodoStats from "./components/TodoStats";
 
 export default function App() {
   const [todos, setTodos] = useState(() => {
@@ -68,7 +68,7 @@ export default function App() {
 
       <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
-      <FilterButton setFilter={setFilter} />
+      <FilterButton filter={filter} setFilter={setFilter} />
 
       <TodoList
         todos={todos}
@@ -77,7 +77,7 @@ export default function App() {
         handleToggleComplete={handleToggleComplete}
       />
 
-      <TodoStates
+      <TodoStats
         todos={todos}
         completedTasks={completedTasks}
         remainingTasks={remainingTasks}

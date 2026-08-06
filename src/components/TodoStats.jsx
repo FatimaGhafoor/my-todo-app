@@ -1,4 +1,4 @@
-export default function TodoStates({ todos, completedTasks, remainingTasks }) {
+export default function TodoStats({ todos, completedTasks, remainingTasks }) {
   return (
     <div className="todos-stats">
       <p>Total Tasks: {todos.length}</p>
