@@ -4,6 +4,7 @@ import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import SearchBar from "./components/SearchBar";
 import FilterButton from "./components/FilterButton";
+import TodoStates from "./components/TodoStats";
 
 export default function App() {
   const [todos, setTodos] = useState(() => {
@@ -76,11 +77,11 @@ export default function App() {
         handleToggleComplete={handleToggleComplete}
       />
 
-      <div className="todos-stats">
-        <p>Total Tasks: {todos.length}</p>
-        <p>Completed Tasks: {completedTasks}</p>
-        <p>Remaining Tasks: {remainingTasks}</p>
-      </div>
+      <TodoStates
+        todos={todos}
+        completedTasks={completedTasks}
+        remainingTasks={remainingTasks}
+      />
     </div>
   );
 }
