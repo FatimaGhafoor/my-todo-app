@@ -74,7 +74,7 @@ export default function App() {
       className={`min-h-screen w-full flex items-stretch transition-colors duration-300 ${isDarkMode ? "bg-[#0B0F19] text-white" : "bg-[#F4F6FA] text-slate-800"}`}
     >
       <aside
-        className={`w-64 border-r p-6 flex flex-col justify-between hidden md:flex ${isDarkMode ? "bg-[#111827] border-slate-800" : "bg-white border-slate-200"}`}
+        className={`w-64 border-r p-6 flex flex-col justify-between md:flex ${isDarkMode ? "bg-[#111827] border-slate-800" : "bg-white border-slate-200"}`}
       >
         <div>
           <div className="flex items-center gap-3 mb-8">
