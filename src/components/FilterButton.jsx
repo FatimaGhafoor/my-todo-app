@@ -43,7 +43,7 @@ export default function FilterButton({
           <button
             key={btn.id}
             onClick={() => setFilter(btn.id)}
-            className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-200 group ${isActive ? btn.activeStyles : "text-slate-500 hover:bg-slate-50 dark:text-slate-400 dark:hover:bg-slate-800/50"}`}
+            className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-semibold transition-colors duration-200 group ${isActive ? btn.activeStyles : "text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800/50"}`}
           >
             <div className="flex items-center gap-3">
               <span className="text-base group-hover:scale-110 transition-transform">
