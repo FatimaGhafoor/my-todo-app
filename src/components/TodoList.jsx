@@ -1,4 +1,6 @@
+// src/components/TodoList.jsx
 import TodoItem from "./TodoItem";
+
 export default function TodoList({
   todos,
   filteredTodos,
@@ -6,13 +8,29 @@ export default function TodoList({
   handleToggleComplete,
 }) {
   return (
-    <>
+    <div className="w-full">
       {todos.length === 0 ? (
-        <p className="empty-message">No tasks yet. Add your first task! 🚀</p>
+        <div className="text-center py-10 px-4">
+          <span className="text-4xl block mb-3">🚀</span>
+          <p className="text-sm font-semibold text-slate-400 tracking-wide uppercase">
+            No tasks yet
+          </p>
+          <p className="text-xs text-slate-400 mt-1">
+            Add your first task above to get started!
+          </p>
+        </div>
       ) : filteredTodos.length === 0 ? (
-        <p>No matching tasks found. 🔍</p>
+        <div className="text-center py-10 px-4">
+          <span className="text-4xl block mb-3">🔍</span>
+          <p className="text-sm font-semibold text-slate-400 tracking-wide uppercase">
+            No matching tasks
+          </p>
+          <p className="text-xs text-slate-400 mt-1">
+            Try resetting your filters or search keywords.
+          </p>
+        </div>
       ) : (
-        <ul className="todos-list">
+        <ul className="flex flex-col gap-3 w-full">
           {filteredTodos.map((todo) => (
             <TodoItem
               key={todo.id}
@@ -23,6 +41,6 @@ export default function TodoList({
           ))}
         </ul>
       )}
-    </>
+    </div>
   );
 }
