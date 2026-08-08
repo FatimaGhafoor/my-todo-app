@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTodos } from "./hooks/useTodos";
 import "./App.css";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
@@ -7,15 +8,8 @@ import FilterButton from "./components/FilterButton";
 import TodoStats from "./components/TodoStats";
 
 export default function App() {
-  const [todos, setTodos] = useState(() => {
-    const savedTodos = localStorage.getItem("todos-database");
-    if (!savedTodos) return [];
-    try {
-      return JSON.parse(savedTodos);
-    } catch {
-      return [];
-    }
-  });
+  const { todos, handleAddTodo, handleDeleteTodo, handleToggleComplete } =
+    useTodos();
   const [newTodo, setNewTodo] = useState("");
   const [filter, setFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
@@ -24,33 +18,8 @@ export default function App() {
     return savedTheme === "dark";
   });
 
-  const handleAddTodo = (e) => {
-    e.preventDefault();
-    if (newTodo.trim() === "") return;
-
-    const newTask = { id: Date.now(), text: newTodo, completed: false };
-    setTodos((prevTodos) => [...prevTodos, newTask]);
-
-    setNewTodo("");
-  };
-
-  const handleDeleteTodo = (id) => {
-    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
-  };
-
-  const handleToggleComplete = (id) => {
-    setTodos((prevTodos) =>
-      prevTodos.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo,
-      ),
-    );
-  };
   const completedTasks = todos.filter((todo) => todo.completed).length;
   const remainingTasks = todos.filter((todo) => !todo.completed).length;
-
-  useEffect(() => {
-    localStorage.setItem("todos-database", JSON.stringify(todos));
-  }, [todos]);
 
   const filteredTodos = todos.filter((todo) => {
     const matchSearch = todo.text
