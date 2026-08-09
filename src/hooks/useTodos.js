@@ -4,7 +4,12 @@ export function useTodos() {
   const [todos, setTodos] = useState(() => {
     const savedTodos = localStorage.getItem("todos-database");
     try {
-      return savedTodos ? JSON.parse(savedTodos) : [];
+      const parsed = savedTodos ? JSON.parse(savedTodos) : [];
+
+      return parsed.map((todo) => ({
+        ...todo,
+        category: todo.category || "General",
+      }));
     } catch {
       return [];
     }
@@ -19,7 +24,12 @@ export function useTodos() {
   const handleAddTodo = () => {
     if (newTodo.trim() === "") return;
 
-    const newTask = { id: Date.now(), text: newTodo, completed: false };
+    const newTask = {
+      id: Date.now(),
+      text: newTodo,
+      completed: false,
+      category: "General",
+    };
     setTodos((prevTodos) => [...prevTodos, newTask]);
 
     setNewTodo("");
