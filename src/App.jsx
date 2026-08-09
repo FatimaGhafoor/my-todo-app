@@ -11,6 +11,8 @@ export default function App() {
   const {
     todos,
     newTodo,
+    selectedCategory,
+    setSelectedCategory,
     setNewTodo,
     handleAddTodo,
     handleDeleteTodo,
@@ -108,6 +110,8 @@ export default function App() {
             newTodo={newTodo}
             setNewTodo={setNewTodo}
             handleAddTodo={handleAddTodo}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
           />
         </section>
 

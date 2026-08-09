@@ -22,6 +22,13 @@ export default function TodoItem({
     setIsEditing(false);
   };
 
+  const categoryColors = {
+    General: "bg-slate-100 text-slate-700",
+    Learning: "bg-blue-100 text-blue-700",
+    Development: "bg-purple-100 text-purple-700",
+    "UI/UX": "bg-pink-100 text-pink-700",
+  };
+
   if (isEditing) {
     return (
       <li className="w-full flex items-center gap-2 px-5 py-4 rounded-xl border bg-blue-50 border-blue-200">
@@ -68,15 +75,23 @@ export default function TodoItem({
           {todo.completed && <span className="text-[10px] font-bold">✓</span>}
         </div>
 
-        <span
-          className={`text-sm font-medium tracking-wide transition-all duration-200 ${
-            todo.completed
-              ? "line-through text-slate-400 font-normal"
-              : "text-slate-700"
-          }`}
-        >
-          {todo.text}
-        </span>
+        <div className="flex flex-col gap-1">
+          <span
+            className={`text-sm font-medium tracking-wide transition-all duration-200 ${
+              todo.completed
+                ? "line-through text-slate-400 font-normal"
+                : "text-slate-700"
+            }`}
+          >
+            {todo.text}
+          </span>
+          {/* ← CATEGORY BADGE ADD KARA */}
+          <span
+            className={`text-xs font-semibold px-2 py-1 rounded-md w-fit ${categoryColors[todo.category] || categoryColors.General}`}
+          >
+            {todo.category || "General"}
+          </span>
+        </div>
       </div>
 
       <div className="flex gap-2">

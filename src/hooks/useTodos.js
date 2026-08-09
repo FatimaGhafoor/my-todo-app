@@ -16,6 +16,7 @@ export function useTodos() {
   });
 
   const [newTodo, setNewTodo] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("General");
 
   useEffect(() => {
     localStorage.setItem("todos-database", JSON.stringify(todos));
@@ -28,11 +29,12 @@ export function useTodos() {
       id: Date.now(),
       text: newTodo,
       completed: false,
-      category: "General",
+      category: selectedCategory,
     };
     setTodos((prevTodos) => [...prevTodos, newTask]);
 
     setNewTodo("");
+    setSelectedCategory("General");
   };
 
   const handleDeleteTodo = (id) => {
@@ -59,6 +61,8 @@ export function useTodos() {
     todos,
     newTodo,
     setNewTodo,
+    selectedCategory,
+    setSelectedCategory,
     handleAddTodo,
     handleDeleteTodo,
     handleToggleComplete,
