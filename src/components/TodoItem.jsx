@@ -1,4 +1,4 @@
-// src/components/TodoItem.jsx
+import { Button } from "./ui/Button";
 
 export default function TodoItem({
   todo,
@@ -38,12 +38,12 @@ export default function TodoItem({
         </span>
       </div>
 
-      <button
+      <Button
         onClick={() => handleDeleteTodo(todo.id)}
         className="opacity-0 group-hover:opacity-100 bg-rose-50 text-rose-600 hover:bg-rose-500 hover:text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-all duration-200"
       >
         Delete
-      </button>
+      </Button>
     </li>
   );
 }
