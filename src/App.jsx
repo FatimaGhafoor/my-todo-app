@@ -8,9 +8,15 @@ import FilterButton from "./components/FilterButton";
 import TodoStats from "./components/TodoStats";
 
 export default function App() {
-  const { todos, handleAddTodo, handleDeleteTodo, handleToggleComplete } =
-    useTodos();
-  const [newTodo, setNewTodo] = useState("");
+  const {
+    todos,
+    newTodo,
+    setNewTodo,
+    handleAddTodo,
+    handleDeleteTodo,
+    handleToggleComplete,
+  } = useTodos();
+
   const [filter, setFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(() => {
