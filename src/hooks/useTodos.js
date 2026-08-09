@@ -37,6 +37,14 @@ export function useTodos() {
     );
   };
 
+  const handleEditTodo = (id, newText) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, text: newText } : todo,
+      ),
+    );
+  };
+
   return {
     todos,
     newTodo,
@@ -44,5 +52,6 @@ export function useTodos() {
     handleAddTodo,
     handleDeleteTodo,
     handleToggleComplete,
+    handleEditTodo,
   };
 }

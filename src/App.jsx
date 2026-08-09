@@ -15,6 +15,7 @@ export default function App() {
     handleAddTodo,
     handleDeleteTodo,
     handleToggleComplete,
+    handleEditTodo,
   } = useTodos();
 
   const [filter, setFilter] = useState("all");
@@ -135,6 +136,7 @@ export default function App() {
             filteredTodos={filteredTodos}
             handleDeleteTodo={handleDeleteTodo}
             handleToggleComplete={handleToggleComplete}
+            handleEditTodo={handleEditTodo}
           />
         </section>
       </main>

@@ -1,10 +1,51 @@
+import { useState } from "react";
 import { Button } from "./ui/Button";
+import { Input } from "./ui/Input";
 
 export default function TodoItem({
   todo,
   handleToggleComplete,
   handleDeleteTodo,
+  handleEditTodo,
 }) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editText, setEditText] = useState(todo.text);
+
+  const handleSave = () => {
+    if (editText.trim() === "") return;
+    handleEditTodo(todo.id, editText);
+    setIsEditing(false);
+  };
+
+  const handleCancel = () => {
+    setEditText(todo.text);
+    setIsEditing(false);
+  };
+
+  if (isEditing) {
+    return (
+      <li className="w-full flex items-center gap-2 px-5 py-4 rounded-xl border bg-blue-50 border-blue-200">
+        <Input
+          value={editText}
+          onChange={(e) => setEditText(e.target.value)}
+          placeholder="Edit task..."
+        />
+        <Button
+          onClick={handleSave}
+          className="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-4 py-2 rounded-lg"
+        >
+          Save
+        </Button>
+        <Button
+          onClick={handleCancel}
+          className="bg-slate-300 hover:bg-slate-400 text-slate-700 font-semibold px-4 py-2 rounded-lg"
+        >
+          Cancel
+        </Button>
+      </li>
+    );
+  }
+
   return (
     <li
       className={`w-full flex items-center justify-between px-5 py-4 rounded-xl border transition-all duration-200 group ${
@@ -38,12 +79,20 @@ export default function TodoItem({
         </span>
       </div>
 
-      <Button
-        onClick={() => handleDeleteTodo(todo.id)}
-        className="opacity-0 group-hover:opacity-100 bg-rose-50 text-rose-600 hover:bg-rose-500 hover:text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-all duration-200"
-      >
-        Delete
-      </Button>
+      <div className="flex gap-2">
+        <Button
+          onClick={() => setIsEditing(true)}
+          className="opacity-0 group-hover:opacity-100 bg-blue-50 text-blue-600 hover:bg-blue-500 hover:text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-all duration-200"
+        >
+          Edit
+        </Button>
+        <Button
+          onClick={() => handleDeleteTodo(todo.id)}
+          className="opacity-0 group-hover:opacity-100 bg-rose-50 text-rose-600 hover:bg-rose-500 hover:text-white text-xs font-semibold px-3 py-1.5 rounded-lg transition-all duration-200"
+        >
+          Delete
+        </Button>
+      </div>
     </li>
   );
 }

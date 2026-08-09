@@ -6,6 +6,7 @@ export default function TodoList({
   filteredTodos,
   handleDeleteTodo,
   handleToggleComplete,
+  handleEditTodo,
 }) {
   return (
     <div className="w-full">
@@ -37,6 +38,7 @@ export default function TodoList({
               todo={todo}
               handleDeleteTodo={handleDeleteTodo}
               handleToggleComplete={handleToggleComplete}
+              handleEditTodo={handleEditTodo}
             />
           ))}
         </ul>
