@@ -9,6 +9,7 @@ export function useTodos() {
       return parsed.map((todo) => ({
         ...todo,
         category: todo.category || "General",
+        priority: todo.priority || "Medium",
       }));
     } catch {
       return [];
@@ -17,6 +18,7 @@ export function useTodos() {
 
   const [newTodo, setNewTodo] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("General");
+  const [selectedPriority, setSelectedPriority] = useState("Medium");
 
   useEffect(() => {
     localStorage.setItem("todos-database", JSON.stringify(todos));
@@ -30,11 +32,13 @@ export function useTodos() {
       text: newTodo,
       completed: false,
       category: selectedCategory,
+      priority: selectedPriority,
     };
     setTodos((prevTodos) => [...prevTodos, newTask]);
 
     setNewTodo("");
     setSelectedCategory("General");
+    setSelectedPriority("Medium");
   };
 
   const handleDeleteTodo = (id) => {
@@ -62,6 +66,8 @@ export function useTodos() {
     newTodo,
     setNewTodo,
     selectedCategory,
+    selectedPriority,
+    setSelectedPriority,
     setSelectedCategory,
     handleAddTodo,
     handleDeleteTodo,

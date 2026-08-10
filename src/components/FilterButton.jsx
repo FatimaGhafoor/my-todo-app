@@ -6,6 +6,8 @@ export default function FilterButton({
   remainingTasks,
   categoryFilter,
   setCategoryFilter,
+  priorityFilter,
+  setPriorityFilter,
 }) {
   const BUTTONS_CONFIG = [
     {
@@ -65,6 +67,13 @@ export default function FilterButton({
     },
   ];
 
+  const PRIORITY_CONFIG = [
+    { id: "all", label: "All Priorities", emoji: "⭐" },
+    { id: "High", label: "High", emoji: "🔴" },
+    { id: "Medium", label: "Medium", emoji: "🟡" },
+    { id: "Low", label: "Low", emoji: "🟢" },
+  ];
+
   return (
     <div className="flex flex-col gap-4 w-full">
       <div className="flex flex-col gap-1.5">
@@ -99,7 +108,6 @@ export default function FilterButton({
           );
         })}
       </div>
-
       <div className="border-t border-slate-200 dark:border-slate-700 pt-4">
         <p className="text-xs font-bold text-slate-400 uppercase mb-2 px-1">
           Categories
@@ -124,6 +132,34 @@ export default function FilterButton({
               </button>
             );
           })}
+        </div>
+
+        <div className="border-t border-slate-200 dark:border-slate-700 pt-4">
+          <p className="text-xs font-bold text-slate-400 uppercase mb-2 px-1">
+            Priorities
+          </p>
+          <div className="flex flex-col gap-1.5">
+            {PRIORITY_CONFIG.map((pri) => {
+              const isActive = priorityFilter === pri.id;
+              return (
+                <button
+                  key={pri.id}
+                  onClick={() => setPriorityFilter(pri.id)}
+                  className={`w-full flex items-center justify-start px-4 py-2 rounded-xl text-sm font-medium transition-colors duration-200 group 
+                  ${
+                    isActive
+                      ? "bg-indigo-50 text-indigo-600 dark:bg-indigo-950/40 dark:text-indigo-400"
+                      : "text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800/50"
+                  } `}
+                >
+                  <span className="text-base mr-2 group-hover:scale-110 transition-transform">
+                    {pri.emoji}
+                  </span>
+                  <span>{pri.label}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

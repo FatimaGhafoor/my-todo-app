@@ -12,6 +12,8 @@ export default function App() {
     todos,
     newTodo,
     selectedCategory,
+    selectedPriority,
+    setSelectedPriority,
     setSelectedCategory,
     setNewTodo,
     handleAddTodo,
@@ -22,6 +24,7 @@ export default function App() {
 
   const [filter, setFilter] = useState("all");
   const [categoryFilter, setCategoryFilter] = useState("all");
+  const [priorityFilter, setPriorityFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem("todo-theme");
@@ -38,11 +41,13 @@ export default function App() {
 
     const matchCategory =
       categoryFilter === "all" || todo.category === categoryFilter;
+    const matchPriority =
+      priorityFilter === "all" || todo.priority === priorityFilter;
     if (filter === "active")
-      return !todo.completed && matchSearch && matchCategory;
+      return !todo.completed && matchSearch && matchCategory && matchPriority;
     if (filter === "completed")
-      return todo.completed && matchSearch && matchCategory;
-    return matchSearch && matchCategory;
+      return todo.completed && matchSearch && matchCategory && matchPriority;
+    return matchSearch && matchCategory && matchPriority;
   });
 
   const toggleDarkMode = () => {
@@ -78,6 +83,8 @@ export default function App() {
             remainingTasks={remainingTasks}
             categoryFilter={categoryFilter}
             setCategoryFilter={setCategoryFilter}
+            priorityFilter={priorityFilter}
+            setPriorityFilter={setPriorityFilter}
           />
         </div>
 
@@ -119,6 +126,8 @@ export default function App() {
             setNewTodo={setNewTodo}
             handleAddTodo={handleAddTodo}
             selectedCategory={selectedCategory}
+            selectedPriority={selectedPriority}
+            setSelectedPriority={setSelectedPriority}
             setSelectedCategory={setSelectedCategory}
           />
         </section>

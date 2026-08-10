@@ -29,6 +29,18 @@ export default function TodoItem({
     "UI/UX": "bg-pink-100 text-pink-700",
   };
 
+  const priorityColors = {
+    High: "bg-red-100 text-red-700",
+    Medium: "bg-amber-100 text-amber-700",
+    Low: "bg-green-100 text-green-700",
+  };
+
+  const priorityEmojis = {
+    High: "🔴",
+    Medium: "🟡",
+    Low: "🟢",
+  };
+
   if (isEditing) {
     return (
       <li className="w-full flex items-center gap-2 px-5 py-4 rounded-xl border bg-blue-50 border-blue-200">
@@ -85,12 +97,21 @@ export default function TodoItem({
           >
             {todo.text}
           </span>
-          {/* ← CATEGORY BADGE ADD KARA */}
-          <span
-            className={`text-xs font-semibold px-2 py-1 rounded-md w-fit ${categoryColors[todo.category] || categoryColors.General}`}
-          >
-            {todo.category || "General"}
-          </span>
+
+          <div className="flex gap-2">
+            <span
+              className={`text-xs font-semibold px-2 py-1 rounded-md flex items-center gap-1 ${priorityColors[todo.priority] || priorityColors.Medium}`}
+            >
+              {priorityEmojis[todo.priority] || "🟡"}
+              {todo.priority || "Medium"}
+            </span>
+
+            <span
+              className={`text-xs font-semibold px-2 py-1 rounded-md ${categoryColors[todo.category] || categoryColors.General}`}
+            >
+              {todo.category || "General"}
+            </span>
+          </div>
         </div>
       </div>
 

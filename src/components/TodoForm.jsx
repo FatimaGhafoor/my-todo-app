@@ -6,9 +6,12 @@ export default function TodoForm({
   setNewTodo,
   handleAddTodo,
   selectedCategory,
+  selectedPriority,
+  setSelectedPriority,
   setSelectedCategory,
 }) {
   const categories = ["General", "Learning", "Development", "UI/UX"];
+  const priorities = ["Low", "Medium", "High"];
   return (
     <form onSubmit={handleAddTodo} className="flex gap-2 w-full mb-4">
       <Input
@@ -24,6 +27,17 @@ export default function TodoForm({
         {categories.map((cat) => (
           <option key={cat} value={cat}>
             {cat}
+          </option>
+        ))}
+      </select>
+      <select
+        value={selectedPriority}
+        onChange={(e) => setSelectedPriority(e.target.value)}
+        className="px-3 py-2 rounded-xl border border-slate-200 text-slate-700 text-sm font-medium bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 outline-none"
+      >
+        {priorities.map((pri) => (
+          <option key={pri} value={pri}>
+            {pri}
           </option>
         ))}
       </select>
