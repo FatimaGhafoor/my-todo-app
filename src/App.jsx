@@ -21,6 +21,7 @@ export default function App() {
   } = useTodos();
 
   const [filter, setFilter] = useState("all");
+  const [categoryFilter, setCategoryFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem("todo-theme");
@@ -34,9 +35,14 @@ export default function App() {
     const matchSearch = todo.text
       .toLowerCase()
       .includes(searchQuery.toLowerCase());
-    if (filter === "active") return !todo.completed && matchSearch;
-    if (filter === "completed") return todo.completed && matchSearch;
-    return matchSearch;
+
+    const matchCategory =
+      categoryFilter === "all" || todo.category === categoryFilter;
+    if (filter === "active")
+      return !todo.completed && matchSearch && matchCategory;
+    if (filter === "completed")
+      return todo.completed && matchSearch && matchCategory;
+    return matchSearch && matchCategory;
   });
 
   const toggleDarkMode = () => {
@@ -70,6 +76,8 @@ export default function App() {
             todos={todos}
             completedTasks={completedTasks}
             remainingTasks={remainingTasks}
+            categoryFilter={categoryFilter}
+            setCategoryFilter={setCategoryFilter}
           />
         </div>
 
