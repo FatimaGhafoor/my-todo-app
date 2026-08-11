@@ -42,26 +42,26 @@ A feature-rich Todo application built with **React 18** featuring intelligent ta
 ## 🏗️ Project Structure
 
 my-todo-app/
-├── src/
-│ ├── hooks/
-│ │ └── useTodos.js # Custom hook for state management
-│ ├── components/
-│ │ ├── ui/
-│ │ │ ├── Button.jsx # Reusable button component
-│ │ │ └── Input.jsx # Reusable input component
-│ │ ├── App.jsx # Main app component
-│ │ ├── TodoForm.jsx # Add new task form
-│ │ ├── TodoList.jsx # Task list container
-│ │ ├── TodoItem.jsx # Individual task item
-│ │ ├── SearchBar.jsx # Search functionality
-│ │ ├── FilterButton.jsx # Filter controls
-│ │ └── TodoStats.jsx # Statistics display
-│ ├── App.css # Styling
-│ └── main.jsx
-├── README.md # This file
-├── package.json
-└── vite.config.js
-
+├── src/  
+│ ├── hooks/                                                                                                                      
+│ │ └── useTodos.js # Custom hook for state management                                                                                    
+│ ├── components/                                                                            
+│ │ ├── ui/                                                  
+│ │ │ ├── Button.jsx # Reusable button component                          
+│ │ │ └── Input.jsx # Reusable input component                                  
+│ │ ├── App.jsx # Main app component                                   
+│ │ ├── TodoForm.jsx # Add new task form                                
+│ │ ├── TodoList.jsx # Task list container                                                
+│ │ ├── TodoItem.jsx # Individual task item                                            
+│ │ ├── SearchBar.jsx # Search functionality                                                             
+│ │ ├── FilterButton.jsx # Filter controls                                                   
+│ │ └── TodoStats.jsx # Statistics display                                                                    
+│ ├── App.css # Styling                                                          
+│ └── main.jsx                                                                                                               
+├── README.md # This file                                                                                                            
+├── package.json                                                                                                                         
+└── vite.config.js                                                                                                             
+                                                                    
 ---
 
 ## 🚀 Getting Started
