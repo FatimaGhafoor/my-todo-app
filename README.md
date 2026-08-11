@@ -42,8 +42,11 @@ A feature-rich Todo application built with **React 18** featuring intelligent ta
 ## 🏗️ Project Structure
 
 my-todo-app/
+
 ├── src/  
+
 │ ├── hooks/
+
 │ │ └── useTodos.js # Custom hook for state management
 │ ├── components/
 │ │ ├── ui/
