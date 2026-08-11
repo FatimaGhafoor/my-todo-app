@@ -134,8 +134,6 @@ useTodos() - Centralized state management
 - `<Button>` - Flexible button with variants & sizes
 - `<Input>` - Consistent input styling
 
-### Multi-Criteria Filtering
-
 Status Filter → Category Filter → Priority Filter → Due Date Filter → Search Filter = Powerful queries
 
 ### Data Persistence
