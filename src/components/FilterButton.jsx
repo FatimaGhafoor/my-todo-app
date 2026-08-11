@@ -8,6 +8,8 @@ export default function FilterButton({
   setCategoryFilter,
   priorityFilter,
   setPriorityFilter,
+  dueDateFilter,
+  setDueDateFilter,
 }) {
   const BUTTONS_CONFIG = [
     {
@@ -40,31 +42,11 @@ export default function FilterButton({
   ];
 
   const CATEGORY_CONFIG = [
-    {
-      id: "all",
-      label: "All Categories",
-      emoji: "📂",
-    },
-    {
-      id: "General",
-      label: "General",
-      emoji: "📝",
-    },
-    {
-      id: "Learning",
-      label: "Learning",
-      emoji: "📚",
-    },
-    {
-      id: "Development",
-      label: "Development",
-      emoji: "💻",
-    },
-    {
-      id: "UI/UX",
-      label: "UI/UX",
-      emoji: "🎨",
-    },
+    { id: "all", label: "All Categories", emoji: "📂" },
+    { id: "General", label: "General", emoji: "📝" },
+    { id: "Learning", label: "Learning", emoji: "📚" },
+    { id: "Development", label: "Development", emoji: "💻" },
+    { id: "UI/UX", label: "UI/UX", emoji: "🎨" },
   ];
 
   const PRIORITY_CONFIG = [
@@ -72,6 +54,13 @@ export default function FilterButton({
     { id: "High", label: "High", emoji: "🔴" },
     { id: "Medium", label: "Medium", emoji: "🟡" },
     { id: "Low", label: "Low", emoji: "🟢" },
+  ];
+
+  const DUE_DATE_CONFIG = [
+    { id: "all", label: "All Dates", emoji: "📅" },
+    { id: "overdue", label: "Overdue", emoji: "⏰" },
+    { id: "today", label: "Today", emoji: "📍" },
+    { id: "upcoming", label: "Upcoming", emoji: "📆" },
   ];
 
   return (
@@ -108,6 +97,7 @@ export default function FilterButton({
           );
         })}
       </div>
+
       <div className="border-t border-slate-200 dark:border-slate-700 pt-4">
         <p className="text-xs font-bold text-slate-400 uppercase mb-2 px-1">
           Categories
@@ -133,33 +123,59 @@ export default function FilterButton({
             );
           })}
         </div>
+      </div>
 
-        <div className="border-t border-slate-200 dark:border-slate-700 pt-4">
-          <p className="text-xs font-bold text-slate-400 uppercase mb-2 px-1">
-            Priorities
-          </p>
-          <div className="flex flex-col gap-1.5">
-            {PRIORITY_CONFIG.map((pri) => {
-              const isActive = priorityFilter === pri.id;
-              return (
-                <button
-                  key={pri.id}
-                  onClick={() => setPriorityFilter(pri.id)}
-                  className={`w-full flex items-center justify-start px-4 py-2 rounded-xl text-sm font-medium transition-colors duration-200 group 
-                  ${
-                    isActive
-                      ? "bg-indigo-50 text-indigo-600 dark:bg-indigo-950/40 dark:text-indigo-400"
-                      : "text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800/50"
-                  } `}
-                >
-                  <span className="text-base mr-2 group-hover:scale-110 transition-transform">
-                    {pri.emoji}
-                  </span>
-                  <span>{pri.label}</span>
-                </button>
-              );
-            })}
-          </div>
+      <div className="border-t border-slate-200 dark:border-slate-700 pt-4">
+        <p className="text-xs font-bold text-slate-400 uppercase mb-2 px-1">
+          Priorities
+        </p>
+        <div className="flex flex-col gap-1.5">
+          {PRIORITY_CONFIG.map((pri) => {
+            const isActive = priorityFilter === pri.id;
+            return (
+              <button
+                key={pri.id}
+                onClick={() => setPriorityFilter(pri.id)}
+                className={`w-full flex items-center justify-start px-4 py-2 rounded-xl text-sm font-medium transition-colors duration-200 group ${
+                  isActive
+                    ? "bg-indigo-50 text-indigo-600 dark:bg-indigo-950/40 dark:text-indigo-400"
+                    : "text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800/50"
+                }`}
+              >
+                <span className="text-base mr-2 group-hover:scale-110 transition-transform">
+                  {pri.emoji}
+                </span>
+                <span>{pri.label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <div className="border-t border-slate-200 dark:border-slate-700 pt-4">
+        <p className="text-xs font-bold text-slate-400 uppercase mb-2 px-1">
+          Due Dates
+        </p>
+        <div className="flex flex-col gap-1.5">
+          {DUE_DATE_CONFIG.map((date) => {
+            const isActive = dueDateFilter === date.id;
+            return (
+              <button
+                key={date.id}
+                onClick={() => setDueDateFilter(date.id)}
+                className={`w-full flex items-center justify-start px-4 py-2 rounded-xl text-sm font-medium transition-colors duration-200 group ${
+                  isActive
+                    ? "bg-indigo-50 text-indigo-600 dark:bg-indigo-950/40 dark:text-indigo-400"
+                    : "text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800/50"
+                }`}
+              >
+                <span className="text-base mr-2 group-hover:scale-110 transition-transform">
+                  {date.emoji}
+                </span>
+                <span>{date.label}</span>
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>

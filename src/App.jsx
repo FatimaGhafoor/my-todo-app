@@ -15,6 +15,8 @@ export default function App() {
     selectedPriority,
     setSelectedPriority,
     setSelectedCategory,
+    selectedDueDate,
+    setSelectedDueDate,
     setNewTodo,
     handleAddTodo,
     handleDeleteTodo,
@@ -25,6 +27,7 @@ export default function App() {
   const [filter, setFilter] = useState("all");
   const [categoryFilter, setCategoryFilter] = useState("all");
   const [priorityFilter, setPriorityFilter] = useState("all");
+  const [dueDateFilter, setDueDateFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const savedTheme = localStorage.getItem("todo-theme");
@@ -34,20 +37,64 @@ export default function App() {
   const completedTasks = todos.filter((todo) => todo.completed).length;
   const remainingTasks = todos.filter((todo) => !todo.completed).length;
 
+  const isOverdue = (dateString) => {
+    if (!dateString) return false;
+    const dueDate = new Date(dateString + "T00:00:00");
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return dueDate < today;
+  };
+
+  const isToday = (dateString) => {
+    if (!dateString) return false;
+    const dueDate = new Date(dateString + "T00:00:00");
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return dueDate.getTime() === today.getTime();
+  };
+
+  const isUpcoming = (dateString) => {
+    if (!dateString) return false;
+    const dueDate = new Date(dateString + "T00:00:00");
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return dueDate > today;
+  };
+
   const filteredTodos = todos.filter((todo) => {
     const matchSearch = todo.text
       .toLowerCase()
       .includes(searchQuery.toLowerCase());
-
     const matchCategory =
       categoryFilter === "all" || todo.category === categoryFilter;
     const matchPriority =
       priorityFilter === "all" || todo.priority === priorityFilter;
+
+    let matchDueDate = true;
+    if (dueDateFilter === "overdue")
+      matchDueDate = isOverdue(todo.dueDate) && !todo.completed;
+    else if (dueDateFilter === "today") matchDueDate = isToday(todo.dueDate);
+    else if (dueDateFilter === "upcoming")
+      matchDueDate = isUpcoming(todo.dueDate);
+
     if (filter === "active")
-      return !todo.completed && matchSearch && matchCategory && matchPriority;
+      return (
+        !todo.completed &&
+        matchSearch &&
+        matchCategory &&
+        matchPriority &&
+        matchDueDate
+      );
     if (filter === "completed")
-      return todo.completed && matchSearch && matchCategory && matchPriority;
-    return matchSearch && matchCategory && matchPriority;
+      return (
+        todo.completed &&
+        matchSearch &&
+        matchCategory &&
+        matchPriority &&
+        matchDueDate
+      );
+
+    return matchSearch && matchCategory && matchPriority && matchDueDate;
   });
 
   const toggleDarkMode = () => {
@@ -85,6 +132,8 @@ export default function App() {
             setCategoryFilter={setCategoryFilter}
             priorityFilter={priorityFilter}
             setPriorityFilter={setPriorityFilter}
+            dueDateFilter={dueDateFilter}
+            setDueDateFilter={setDueDateFilter}
           />
         </div>
 
@@ -129,6 +178,8 @@ export default function App() {
             selectedPriority={selectedPriority}
             setSelectedPriority={setSelectedPriority}
             setSelectedCategory={setSelectedCategory}
+            selectedDueDate={selectedDueDate}
+            setSelectedDueDate={setSelectedDueDate}
           />
         </section>
 

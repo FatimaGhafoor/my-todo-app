@@ -9,6 +9,8 @@ export default function TodoForm({
   selectedPriority,
   setSelectedPriority,
   setSelectedCategory,
+  selectedDueDate,
+  setSelectedDueDate,
 }) {
   const categories = ["General", "Learning", "Development", "UI/UX"];
   const priorities = ["Low", "Medium", "High"];
@@ -41,6 +43,11 @@ export default function TodoForm({
           </option>
         ))}
       </select>
+      <input
+        type="date"
+        value={selectedDueDate}
+        onChange={(e) => setSelectedDueDate(e.target.value)}
+      />
       <Button
         type="submit"
         className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-5"

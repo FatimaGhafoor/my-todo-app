@@ -41,6 +41,32 @@ export default function TodoItem({
     Low: "🟢",
   };
 
+  const formatDate = (dateString) => {
+    if (!dateString) return null;
+    const date = new Date(dateString + "T00:00:00");
+    return date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  };
+
+  const isOverdue = (dateString) => {
+    if (!dateString) return false;
+    const dueDate = new Date(dateString + "T00:00:00");
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return dueDate < today && !todo.completed;
+  };
+
+  const isToday = (dateString) => {
+    if (!dateString) return false;
+    const dueDate = new Date(dateString + "T00:00:00");
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return dueDate.getTime() === today.getTime();
+  };
+
   if (isEditing) {
     return (
       <li className="w-full flex items-center gap-2 px-5 py-4 rounded-xl border bg-blue-50 border-blue-200">
@@ -87,7 +113,7 @@ export default function TodoItem({
           {todo.completed && <span className="text-[10px] font-bold">✓</span>}
         </div>
 
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-2">
           <span
             className={`text-sm font-medium tracking-wide transition-all duration-200 ${
               todo.completed
@@ -98,7 +124,7 @@ export default function TodoItem({
             {todo.text}
           </span>
 
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             <span
               className={`text-xs font-semibold px-2 py-1 rounded-md flex items-center gap-1 ${priorityColors[todo.priority] || priorityColors.Medium}`}
             >
@@ -111,6 +137,28 @@ export default function TodoItem({
             >
               {todo.category || "General"}
             </span>
+
+            {todo.dueDate && (
+              <span
+                className={`text-xs font-semibold px-2 py-1 rounded-md flex items-center gap-1 ${
+                  isOverdue(todo.dueDate)
+                    ? "bg-red-100 text-red-700"
+                    : isToday(todo.dueDate)
+                      ? "bg-orange-100 text-orange-700"
+                      : "bg-cyan-100 text-cyan-700"
+                }`}
+              >
+                {isOverdue(todo.dueDate) && "⏰"}
+                {isToday(todo.dueDate) && "📅"}
+                {!isOverdue(todo.dueDate) && !isToday(todo.dueDate) && "📆"}
+                {isOverdue(todo.dueDate)
+                  ? "Overdue"
+                  : isToday(todo.dueDate)
+                    ? "Today"
+                    : "Due"}{" "}
+                {formatDate(todo.dueDate)}
+              </span>
+            )}
           </div>
         </div>
       </div>

@@ -10,6 +10,7 @@ export function useTodos() {
         ...todo,
         category: todo.category || "General",
         priority: todo.priority || "Medium",
+        dueDate: todo.dueDate || null,
       }));
     } catch {
       return [];
@@ -19,6 +20,7 @@ export function useTodos() {
   const [newTodo, setNewTodo] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("General");
   const [selectedPriority, setSelectedPriority] = useState("Medium");
+  const [selectedDueDate, setSelectedDueDate] = useState("");
 
   useEffect(() => {
     localStorage.setItem("todos-database", JSON.stringify(todos));
@@ -33,12 +35,14 @@ export function useTodos() {
       completed: false,
       category: selectedCategory,
       priority: selectedPriority,
+      dueDate: selectedDueDate || null,
     };
     setTodos((prevTodos) => [...prevTodos, newTask]);
 
     setNewTodo("");
     setSelectedCategory("General");
     setSelectedPriority("Medium");
+    setSelectedDueDate("");
   };
 
   const handleDeleteTodo = (id) => {
@@ -67,6 +71,8 @@ export function useTodos() {
     setNewTodo,
     selectedCategory,
     selectedPriority,
+    selectedDueDate,
+    setSelectedDueDate,
     setSelectedPriority,
     setSelectedCategory,
     handleAddTodo,
