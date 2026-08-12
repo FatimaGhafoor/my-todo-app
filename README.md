@@ -312,7 +312,7 @@ This project is open source and available under the MIT License.
 ## 🔗 Links
 
 - **GitHub Repository:** https://github.com/FatimaGhafoor/my-todo-app
-- **Live Demo:** [Add Netlify/Vercel URL]
+- **Live Demo:** https://todo-app-fatima.netlify.app/
 - **Developer:** [Fatima Ghafoor](https://github.com/FatimaGhafoor)
 
 ---
