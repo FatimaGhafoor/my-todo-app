@@ -134,6 +134,8 @@ useTodos() - Centralized state management
 - `<Button>` - Flexible button with variants & sizes
 - `<Input>` - Consistent input styling
 
+### Multi-Criteria Filtering
+
 Status Filter → Category Filter → Priority Filter → Due Date Filter → Search Filter = Powerful queries
 
 ### Data Persistence
@@ -282,30 +284,8 @@ This is a personal learning project. Feel free to:
 
 ## 📄 License
 
-This project is open source and available under the MIT License.
-
----
-
-## 💼 Resume Value
-
-**This project demonstrates:**
-✅ Full CRUD application development
-✅ Custom React Hooks & state management
-✅ Multi-criteria filtering system
-✅ Data persistence with localStorage
-✅ Responsive UI design
-✅ Component composition & reusability
-✅ JavaScript date handling
-✅ Git version control
-✅ Problem-solving & debugging
-✅ Code organization & best practices
-
-**Perfect for:**
-
-- Junior React Developer interviews
-- Portfolio demonstration
-- Learning React fundamentals
-- Understanding modern web development patterns
+This is a personal learning project created for educational and portfolio purposes.
+Feel free to use this code as a reference for your own project
 
 ---
 
